@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Download from Instagram</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background: linear-gradient(to right, rgb(255, 255, 255), rgb(208, 161, 255));
+      display: flex;
+      font-family: sans-serif;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+      min-height: 100vh;
+    }
+    .from {
+      background: white;
+      box-shadow: 0px 0px 10px gray;
+      padding: 20px;
+      width: 90%;
+      max-width: 500px;
+      border-radius: 10px;
+    }
+    h1 {
+      text-align: center;
+      font-size: 18px;
+      color: #A751DC;
+    }
+    .link {
+      width: calc(100% - 14px);
+      height: 30px;
+      margin-top: 15px;
+      text-align: center;
+      border: 2px solid #7F0ED5;
+      border-radius: 5px;
+      padding: 5px;
+      color: #FF1010;
+    }
+    .link::placeholder {
+      color: #7F0ED5;
+    }
+    .Get {
+      width: 100%;
+      display: block;
+      background-color: #D0A1FF;
+      border: none;
+      padding: 12px 25px;
+      font-size: 18px;
+      color: #fff;
+      font-weight: 600;
+      margin-top: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      outline: none;
+    }
+    .hidden {
+      display: none;
+    }
+    .hidden.active {
+      display: block;
+    }
+    .video-container {
+      margin: 15px 0;
+      width: 100%;
+      max-width: 100%;
+      overflow: hidden;
+      border-radius: 5px;
+      text-align: center;
+    }
+    .video-container video {
+      max-width: 100%;
+      height: auto;
+      max-height: 80vh;
+    }
+    .video-container img {
+      max-width: 100%;
+      height: auto;
+      max-height: 80vh;
+    }
+    .download-hint {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #7F0ED5;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="from">
+    <h1>تحميل من الانستكرام</h1>
+    <input type="text" class="link Instagram" placeholder="...الصق رابط الفيدو هنا" />
+    <button class="Get" onclick="Direct()">Get</button>
+    <div class="hidden">
+      <div class="video-container" id="media-container"></div>
+      <p class="download-hint">Right-click on the video/image and select "Save as" to download</p>
+    </div>
+  </div>
+
+  <script>
+    var Instagram = document.querySelector('.Instagram');
+    var hidden = document.querySelector('.hidden');
+    var mediaContainer = document.getElementById('media-container');
+
+    function Direct() {
+      if (Instagram.value != "") {
+        const options = {
+          method: 'GET',
+          headers: {
+            'X-RapidAPI-Key': '2b929025ddmshd3302ab633a818cp1ab4cdjsne14ca95e2a8d',
+            'X-RapidAPI-Host': 'instagram-downloader-download-instagram-videos-stories.p.rapidapi.com'
+          }
+        };
+        var url = 'https://instagram-downloader-download-instagram-videos-stories.p.rapidapi.com/index?url=' + Instagram.value;
+        
+        fetch(url, options)
+          .then(response => response.json())
+          .then(data => {
+            console.log(data);
+            hidden.classList.add('active');
+            
+            // Clear previous media
+            mediaContainer.innerHTML = '';
+            
+            // Display the media based on type
+            if (data.Type.includes("Video")) {
+              mediaContainer.innerHTML = `
+                <video controls autoplay>
+                  <source src="${data.media}" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+              `;
+            } else if (data.Type.includes("Image")) {
+              mediaContainer.innerHTML = `<img src="${data.media}" alt="Instagram Image">`;
+            }
+          })
+          .catch(err => {
+            console.error(err);
+            alert('Error fetching media. Please check the URL and try again.');
+          });
+      } else {
+        alert('Enter Your Instagram Url');
+      }
+    }
+  </script>
+</body>
+</html>
