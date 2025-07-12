@@ -1,105 +1,394 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <title>تحميل من جميع مواقع التواصل</title>
+  <title>أداة التحميل من وسائل التواصل الاجتماعي</title>
+  <meta name="description" content="أداة متكاملة لتحميل الفيديوهات والصور من جميع منصات التواصل الاجتماعي بجودة عالية">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600&display=swap" rel="stylesheet">
-  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2111/2111646.png">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3663/3663889.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    body {
+    :root {
+      --primary-color: #4361ee;
+      --secondary-color: #3f37c9;
+      --accent-color: #4895ef;
+      --light-color: #f8f9fa;
+      --dark-color: #212529;
+      --success-color: #4cc9f0;
+      --gradient-start: #4361ee;
+      --gradient-end: #3a0ca3;
+    }
+    
+    * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Cairo', sans-serif;
-      background: linear-gradient(to bottom, #1f1c2c, #928dab);
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+    }
+    
+    body {
+      font-family: 'Tajawal', sans-serif;
+      background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+      color: var(--light-color);
       min-height: 100vh;
-      text-align: center;
-    }
-
-    h1 {
-      margin-top: 40px;
-      font-size: 2.5rem;
-      color: #ffd700;
-    }
-
-    .buttons {
-      margin-top: 30px;
       display: flex;
       flex-direction: column;
-      gap: 15px;
+      align-items: center;
+      text-align: center;
+      line-height: 1.6;
+      padding: 20px;
     }
-
-    .buttons a {
-      text-decoration: none;
-      background: #fff;
-      color: #1f1c2c;
-      padding: 15px 30px;
-      border-radius: 12px;
-      font-size: 1.2rem;
-      font-weight: bold;
-      transition: 0.3s ease;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: auto;
+      padding: 20px;
     }
-
-    .buttons a:hover {
-      background-color: #ffd700;
-      color: #000;
+    
+    header {
+      margin-bottom: 40px;
+      animation: fadeInDown 1s ease;
     }
-
-    footer {
-      margin-top: 50px;
-      font-size: 0.9rem;
-      color: #ddd;
-    }
-
-    .telegram-icon {
-      position: fixed;
-      bottom: 20px;
-      left: 20px;
-      background-color: #0088cc;
+    
+    .logo {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 20px;
+      background-color: rgba(255, 255, 255, 0.1);
       border-radius: 50%;
-      width: 55px;
-      height: 55px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 15px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .logo img {
+      width: 100%;
+    }
+    
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+      font-weight: 700;
+      background: linear-gradient(to right, #fff, #f8f9fa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .subtitle {
+      font-size: 1.2rem;
+      color: rgba(255, 255, 255, 0.8);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    
+    .platforms {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+      width: 100%;
+      margin: 40px 0;
+    }
+    
+    .platform-card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 15px;
+      padding: 30px;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    .platform-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+      background: rgba(255, 255, 255, 0.15);
+    }
+    
+    .platform-icon {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      color: white;
+    }
+    
+    .platform-name {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      font-weight: 500;
+    }
+    
+    .platform-desc {
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 20px;
+    }
+    
+    .btn {
+      display: inline-block;
+      background: var(--light-color);
+      color: var(--primary-color);
+      padding: 12px 30px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .btn:hover {
+      background: transparent;
+      color: var(--light-color);
+      border-color: var(--light-color);
+      transform: translateY(-3px);
+    }
+    
+    .btn i {
+      margin-left: 8px;
+    }
+    
+    .features {
+      margin: 60px 0;
+      width: 100%;
+    }
+    
+    .features h2 {
+      font-size: 2rem;
+      margin-bottom: 40px;
+      position: relative;
+      display: inline-block;
+    }
+    
+    .features h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background: var(--accent-color);
+      border-radius: 3px;
+    }
+    
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      margin-top: 30px;
+    }
+    
+    .feature {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 25px;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+    }
+    
+    .feature:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateY(-5px);
+    }
+    
+    .feature i {
+      font-size: 2rem;
+      color: var(--accent-color);
+      margin-bottom: 15px;
+    }
+    
+    .feature h3 {
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+    }
+    
+    .feature p {
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.7);
+    }
+    
+    footer {
+      margin-top: auto;
+      padding: 30px 0;
+      width: 100%;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.9rem;
+    }
+    
+    .social-links {
       display: flex;
       justify-content: center;
+      gap: 20px;
+      margin-top: 20px;
+    }
+    
+    .social-link {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      display: flex;
       align-items: center;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.4);
-      transition: 0.3s;
+      justify-content: center;
+      color: white;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
     }
-
-    .telegram-icon img {
-      width: 30px;
-      height: 30px;
-    }
-
-    .telegram-icon:hover {
+    
+    .social-link:hover {
+      background: var(--accent-color);
       transform: scale(1.1);
+    }
+    
+    /* Animations */
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2rem;
+      }
+      
+      .subtitle {
+        font-size: 1rem;
+      }
+      
+      .platforms {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 <body>
-
-  <h1>📥 تحميل من جميع مواقع التواصل</h1>
-
-  <div class="buttons">
-    <a href="tiktok">تحميل من تيك توك</a>
-    <a href="instagram">تحميل من إنستغرام</a>
-    <a href="youtube">تحميل من يوتيوب</a>
+  <div class="container">
+    <header>
+      <div class="logo">
+        <img src="https://cdn-icons-png.flaticon.com/512/3663/3663889.png" alt="موقع التحميل">
+      </div>
+      <h1>أداة التحميل من وسائل التواصل</h1>
+      <p class="subtitle">حمل الفيديوهات والصور من جميع المنصات الاجتماعية بجودة عالية وبضغطة زر واحدة</p>
+    </header>
+    
+    <div class="platforms">
+      <div class="platform-card">
+        <div class="platform-icon">
+          <i class="fab fa-tiktok"></i>
+        </div>
+        <h3 class="platform-name">تيك توك</h3>
+        <p class="platform-desc">حمل فيديوهات تيك توك بدون علامة مائية وبجودة عالية</p>
+        <a href="tiktok" class="btn">تحميل الآن <i class="fas fa-download"></i></a>
+      </div>
+      
+      <div class="platform-card">
+        <div class="platform-icon">
+          <i class="fab fa-instagram"></i>
+        </div>
+        <h3 class="platform-name">إنستغرام</h3>
+        <p class="platform-desc">حمل قصص، فيديوهات، وصور من إنستغرام بسهولة</p>
+        <a href="instagram" class="btn">تحميل الآن <i class="fas fa-download"></i></a>
+      </div>
+      
+      <div class="platform-card">
+        <div class="platform-icon">
+          <i class="fab fa-youtube"></i>
+        </div>
+        <h3 class="platform-name">يوتيوب</h3>
+        <p class="platform-desc">حمل مقاطع يوتيوب بجودة تصل إلى 4K بدون برامج</p>
+        <a href="youtube" class="btn">تحميل الآن <i class="fas fa-download"></i></a>
+      </div>
+    </div>
+    
+    <div class="features">
+      <h2>لماذا تختار أداتنا؟</h2>
+      <div class="features-grid">
+        <div class="feature">
+          <i class="fas fa-bolt"></i>
+          <h3>سرعة فائقة</h3>
+          <p>تحميل سريع بدون انتظار مع خوادم قوية</p>
+        </div>
+        
+        <div class="feature">
+          <i class="fas fa-shield-alt"></i>
+          <h3>آمن تماماً</h3>
+          <p>لا نحفظ أي من بياناتك أو سجل التحميلات</p>
+        </div>
+        
+        <div class="feature">
+          <i class="fas fa-highlighter"></i>
+          <h3>جودة عالية</h3>
+          <p>تحميل بأعلى جودة متاحة للفيديو أو الصورة</p>
+        </div>
+        
+        <div class="feature">
+          <i class="fas fa-comment-dollar"></i>
+          <h3>مجاني بالكامل</h3>
+          <p>لا توجد رسوم خفية أو اشتراكات مطلوبة</p>
+        </div>
+      </div>
+    </div>
   </div>
-
+  
   <footer>
-    <p>جميع الحقوق محفوظة © لدى حسو ال علي</p>
+    <p>جميع الحقوق محفوظة &copy; <span id="year"></span> - أداة التحميل من وسائل التواصل</p>
+    <div class="social-links">
+      <a href="https://t.me/python336" class="social-link" target="_blank" title="تيليجرام">
+        <i class="fab fa-telegram"></i>
+      </a>
+      <a href="#" class="social-link" target="_blank" title="تويتر">
+        <i class="fab fa-twitter"></i>
+      </a>
+      <a href="#" class="social-link" target="_blank" title="فيسبوك">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+      <a href="#" class="social-link" target="_blank" title="إنستغرام">
+        <i class="fab fa-instagram"></i>
+      </a>
+    </div>
   </footer>
 
-  <a class="telegram-icon" href="https://t.me/python336" target="_blank" title="تابعني على تيليجرام">
-    <img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png" alt="Telegram">
-  </a>
-
+  <script>
+    // إضافة السنة الحالية في الفوتر
+    document.getElementById('year').textContent = new Date().getFullYear();
+    
+    // تأثيرات عند التحميل
+    document.addEventListener('DOMContentLoaded', function() {
+      const cards = document.querySelectorAll('.platform-card');
+      const features = document.querySelectorAll('.feature');
+      
+      cards.forEach((card, index) => {
+        setTimeout(() => {
+          card.style.opacity = '1';
+          card.style.transform = 'translateY(0)';
+        }, index * 200);
+      });
+      
+      features.forEach((feature, index) => {
+        setTimeout(() => {
+          feature.style.opacity = '1';
+        }, index * 150 + 600);
+      });
+    });
+  </script>
 </body>
 </html>
